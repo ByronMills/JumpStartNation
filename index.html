@@ -12,7 +12,7 @@
             background-color: #ffffff;
         }
         .content {
-            padding-bottom: 60px; /* Prevent content from being covered by the nav */
+            padding-bottom: 60px;
             text-align: center;
             padding-top: 20px;
         }
@@ -21,7 +21,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #d40000; /* Red theme */
+            background-color: #d40000;
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
@@ -41,6 +41,16 @@
         .nav-item a:hover {
             opacity: 0.8;
         }
+        .video-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        iframe {
+            width: 90%;
+            max-width: 800px;
+            height: 450px;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +58,13 @@
     <div class="content">
         <h2 style="color: #d40000;">Welcome to Jump Start Nation</h2>
         <p>Live stream and digital content coming soon!</p>
+        
+        <!-- YouTube Live Stream Embed -->
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCx0_PM9hl2tsjtntXykJV_Q" 
+                    frameborder="0" allowfullscreen>
+            </iframe>
+        </div>
     </div>
 
     <div class="bottom-nav">
