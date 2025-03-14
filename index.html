@@ -51,6 +51,12 @@
             max-width: 800px;
             height: 450px;
         }
+        .countdown {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d40000;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -59,12 +65,13 @@
         <h2 style="color: #d40000;">Welcome to Jump Start Nation</h2>
         <p>Live stream and digital content coming soon!</p>
         
-        <!-- YouTube Live Stream Embed -->
         <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCx0_PM9hl2tsjtntXykJV_Q" 
-                    frameborder="0" allowfullscreen>
-            </iframe>
+            <div id="liveStream">
+                <p>🔴 Checking for Live Stream...</p>
+            </div>
         </div>
+
+        <div id="countdown" class="countdown"></div>
     </div>
 
     <div class="bottom-nav">
@@ -74,6 +81,55 @@
         <div class="nav-item"><a href="#">🛒 Store</a></div>
         <div class="nav-item"><a href="#">📅 Events</a></div>
     </div>
+
+    <script>
+        async function checkLiveStatus() {
+            const channelId = "UCx0_PM9hl2tsjtntXykJV_Q";
+            const apiKey = "YOUR_YOUTUBE_API_KEY";  // Replace this with your YouTube API key
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.items.length > 0) {
+                    const videoId = data.items[0].id.videoId;
+                    document.getElementById("liveStream").innerHTML = `
+                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                    `;
+                } else {
+                    document.getElementById("liveStream").innerHTML = `<p>🚫 No Live Stream Right Now</p>`;
+                    showCountdown();
+                }
+            } catch (error) {
+                console.error("Error fetching live status:", error);
+            }
+        }
+
+        function showCountdown() {
+            const nextStreamTime = new Date("2025-03-15T14:00:00Z"); // Set your next live stream date/time
+            const countdownElement = document.getElementById("countdown");
+
+            function updateCountdown() {
+                const now = new Date();
+                const timeDiff = nextStreamTime - now;
+
+                if (timeDiff > 0) {
+                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                    countdownElement.innerHTML = `⏳ Next Live Stream: ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    countdownElement.innerHTML = "🎬 Going Live Soon!";
+                }
+            }
+
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+        }
+
+        checkLiveStatus();
+    </script>
 
 </body>
 </html>
