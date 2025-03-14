@@ -8,20 +8,24 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Helvitica, sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
         }
         .content {
             padding-bottom: 60px; /* Prevent content from being covered by the nav */
+            text-align: center;
+            padding-top: 20px;
         }
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: black;
+            background-color: #d40000; /* Red theme */
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            padding: 12px 0;
+            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
         }
         .nav-item {
             color: white;
@@ -32,17 +36,21 @@
             text-decoration: none;
             color: white;
             font-size: 16px;
+            font-weight: bold;
+        }
+        .nav-item a:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
 
     <div class="content">
-        <h2>Welcome to Jump Start Nation</h2>
+        <h2 style="color: #d40000;">Welcome to Jump Start Nation</h2>
         <p>Live stream and digital content coming soon!</p>
     </div>
 
-    <div class="side">
+    <div class="bottom-nav">
         <div class="nav-item"><a href="#">🏠 Home</a></div>
         <div class="nav-item"><a href="#">🎥 Live</a></div>
         <div class="nav-item"><a href="#">📚 Courses</a></div>
