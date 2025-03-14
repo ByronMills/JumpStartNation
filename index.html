@@ -3,30 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JumpStart Nation</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Jump Start Nation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            padding-bottom: 60px; /* Prevent content from being covered by the nav */
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: black;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+        .nav-item {
+            color: white;
+            text-align: center;
+            flex-grow: 1;
+        }
+        .nav-item a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <img src=""C:\Users\byron\Pictures\Jumpstart\Jumpstart Logos\FOR MERCH JN Logo Colors-02.png"" alt="JumpStart Nation Logo" class="logo">
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Live</a></li>
-                <li><a href="#">Store</a></li>
-                <li><a href="#">Courses</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <h1>Welcome to JumpStart Nation</h1>
-        <p>Live streaming and digital products coming soon!</p>
-        
-        <!-- YouTube Live Stream Embed -->
-        <div class="livestream">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=UCx0_PM9hl2tsjtntXykJV_Q" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </main>
+    <div class="content">
+        <h2>Welcome to Jump Start Nation</h2>
+        <p>Live stream and digital content coming soon!</p>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item"><a href="#">🏠 Home</a></div>
+        <div class="nav-item"><a href="#">🎥 Live</a></div>
+        <div class="nav-item"><a href="#">📚 Courses</a></div>
+        <div class="nav-item"><a href="#">🛒 Store</a></div>
+        <div class="nav-item"><a href="#">📅 Events</a></div>
+    </div>
+
 </body>
 </html>
