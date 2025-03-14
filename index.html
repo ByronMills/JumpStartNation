@@ -3,133 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jump Start Nation</title>
+    <title>Jump Start Nation Live</title>
     <style>
         body {
-            margin: 0;
-            padding: 0;
+            text-align: center;
             font-family: Arial, sans-serif;
-            background-color: #ffffff;
-        }
-        .content {
-            padding-bottom: 60px;
-            text-align: center;
-            padding-top: 20px;
-        }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #d40000;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
-        }
-        .nav-item {
+            background-color: black;
             color: white;
-            text-align: center;
-            flex-grow: 1;
-        }
-        .nav-item a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .nav-item a:hover {
-            opacity: 0.8;
-        }
-        .video-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
         }
         iframe {
-            width: 90%;
-            max-width: 800px;
-            height: 450px;
-        }
-        .countdown {
-            font-size: 20px;
-            font-weight: bold;
-            color: #d40000;
-            margin-top: 20px;
+            width: 80%;
+            height: 400px;
+            border: none;
         }
     </style>
-</head>
-<body>
-
-    <div class="content">
-        <h2 style="color: #d40000;">Welcome to Jump Start Nation</h2>
-        <p>Live stream and digital content coming soon!</p>
-        
-        <div class="video-container">
-            <div id="liveStream">
-                <p>🔴 Checking for Live Stream...</p>
-            </div>
-        </div>
-
-        <div id="countdown" class="countdown"></div>
-    </div>
-
-    <div class="bottom-nav">
-        <div class="nav-item"><a href="#">🏠 Home</a></div>
-        <div class="nav-item"><a href="#">🎥 Live</a></div>
-        <div class="nav-item"><a href="#">📚 Courses</a></div>
-        <div class="nav-item"><a href="#">🛒 Store</a></div>
-        <div class="nav-item"><a href="#">📅 Events</a></div>
-    </div>
-
     <script>
-        async function checkLiveStatus() {
-            const channelId = "UCx0_PM9hl2tsjtntXykJV_Q";
-            const apiKey = "AIzaSyAEbzxRiHH1d0u9Y3NLtb_OH5bsQ9QRo-8";  // Replace this with your YouTube API key
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`;
+        async function getLiveVideo() {
+            const channelId = "UCx0_PM9hl2tsjtntXykJV_Q";  // Your channel ID
+            const apiKey = "YOUR_YOUTUBE_API_KEY"; // Replace with your API key
+            const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&eventType=live&key=${apiKey}`;
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(apiUrl);
                 const data = await response.json();
-
+                
                 if (data.items.length > 0) {
                     const videoId = data.items[0].id.videoId;
-                    document.getElementById("liveStream").innerHTML = `
-                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-                    `;
+                    document.getElementById("youtube-player").src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
                 } else {
-                    document.getElementById("liveStream").innerHTML = `<p>🚫 No Live Stream Right Now</p>`;
-                    showCountdown();
+                    document.getElementById("video-container").innerHTML = "<h2>No live stream currently available.</h2>";
                 }
             } catch (error) {
-                console.error("Error fetching live status:", error);
+                console.error("Error fetching live stream:", error);
             }
         }
 
-        function showCountdown() {
-            const nextStreamTime = new Date("2025-03-15T14:00:00Z"); // Set your next live stream date/time
-            const countdownElement = document.getElementById("countdown");
-
-            function updateCountdown() {
-                const now = new Date();
-                const timeDiff = nextStreamTime - now;
-
-                if (timeDiff > 0) {
-                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                    countdownElement.innerHTML = `⏳ Next Live Stream: ${hours}h ${minutes}m ${seconds}s`;
-                } else {
-                    countdownElement.innerHTML = "🎬 Going Live Soon!";
-                }
-            }
-
-            setInterval(updateCountdown, 1000);
-            updateCountdown();
-        }
-
-        checkLiveStatus();
+        window.onload = getLiveVideo;
     </script>
-
+</head>
+<body>
+    <h1>Jump Start Nation Live Stream</h1>
+    <div id="video-container">
+        <iframe id="youtube-player" allowfullscreen></iframe>
+    </div>
 </body>
 </html>
